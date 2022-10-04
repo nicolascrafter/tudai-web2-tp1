@@ -1,6 +1,6 @@
 <?php
-class Controller {
-
+require_once "libs/smarty/Smarty.class.php";
+class AdminView {
     private $smarty;
     function __construct()
     {
@@ -8,8 +8,7 @@ class Controller {
         $this->smarty->assign("BASE_URL", BASE_URL);
     }
 
-    function error() {
-        http_response_code(404);
-        $this->smarty->display("app/web/template/error.tpl");
+    function MainView($products) {
+        $this->smarty->display("app/web/template/admin.tpl");
     }
 }

@@ -2,7 +2,9 @@
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
 require_once "app/Controller/Controller.php";
+require_once "app/View/AdminView.php";
 $controller = new Controller();
+$admin_view = new AdminView();
 
 //recibir/leer la accion
 if (!empty($_GET['action'])) {
@@ -17,6 +19,9 @@ $params = explode('/', $accion);
 //
 switch ($params[0]) {
     case "index":
+        break;
+    case "admin":
+        $admin_view->MainView(array());
         break;
     default:
         $controller -> error();
