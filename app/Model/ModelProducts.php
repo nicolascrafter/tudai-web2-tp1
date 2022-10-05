@@ -5,12 +5,13 @@ class ModelProducts
 
     function __construct()
     {
-        $this->db = new PDO('mysql:host=localhost;dbname=db_tareas;charset=utf8','root','');
+        $this->db = new PDO('mysql:host=localhost;dbname=tudai-web2-tp1;charset=utf8','root','');
     }
 
     function GetProducts()
     {
         $sentence = $this->db -> prepare("SELECT products.*, categories.id AS category_id, categories.type, categories.brand FROM products JOIN categories ON products.fk_category = categories.id;");
+        $sentence->execute();
         $data = $sentence->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }

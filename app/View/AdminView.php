@@ -8,7 +8,9 @@ class AdminView {
         $this->smarty->assign("BASE_URL", BASE_URL);
     }
 
-    function MainView($products) {
+    function MainView($products, $categories) {
+        $this->smarty->assign("products", $products);
+        $this->smarty->assign("categories", $categories);
         $this->smarty->display("app/web/template/admin.tpl");
     }
 }
