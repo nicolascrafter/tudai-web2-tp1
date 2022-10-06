@@ -19,15 +19,18 @@ $params = explode('/', $accion);
 //
 switch ($params[0]) {
     case "index":
-        echo("index");
+        echo ("index");
         break;
     case "admin":
         if (isset($params[1]) && $params[1] == "post_category") {
             $controller->PostCategory();
+        } elseif (isset($params[1]) && $params[1] == "post_product") {
+            $controller->PostProduct();
+        } else {
+            $controller->AdminView();
+            break;
         }
-        $controller->AdminView();
-        break;
     default:
-        $controller -> error();
+        $controller->error();
         break;
 }

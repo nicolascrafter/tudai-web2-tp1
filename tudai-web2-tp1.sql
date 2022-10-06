@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2022 a las 21:08:54
+-- Tiempo de generación: 06-10-2022 a las 02:57:34
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,9 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `type` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `brand` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `type` text COLLATE utf8_bin NOT NULL,
+  `brand` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `type`, `brand`) VALUES
+(1, 'Tarjeta Grafica', 'Nvidia'),
+(2, 'Tarjeta Grafica', 'AMD'),
+(3, 'CPU', 'Intel'),
+(4, 'CPU', 'AMD');
 
 -- --------------------------------------------------------
 
@@ -41,12 +51,12 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `price` int(11) NOT NULL,
+  `name` text COLLATE utf8_bin NOT NULL,
+  `description` longtext COLLATE utf8_bin NOT NULL,
+  `price` decimal(8,2) NOT NULL,
   `stock` int(11) NOT NULL,
   `fk_category` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Índices para tablas volcadas
@@ -73,7 +83,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
