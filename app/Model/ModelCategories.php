@@ -14,6 +14,14 @@ class ModelCategories {
         return $data;
     }
 
+    public function GetCategoryById($id)
+    {
+        $sentence = $this->db->prepare("SELECT * FROM categories WHERE id=?;");
+        $sentence->execute(array($id));
+        $data = $sentence->fetch(PDO::FETCH_OBJ);
+        return $data;
+    }
+
     public function PostCategory($tipo, $marca)
     {
         $sentence = $this->db->prepare("INSERT INTO `categories`(`type`, `brand`) VALUES (?,?)");
