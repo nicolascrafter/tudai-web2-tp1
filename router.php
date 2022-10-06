@@ -19,7 +19,7 @@ $params = explode('/', $accion);
 //
 switch ($params[0]) {
     case "index":
-        echo ("index");
+        echo  ("index");
         break;
     case "admin":
         if (isset($params[1]) && $params[1] == "post_category") {
@@ -34,3 +34,4 @@ switch ($params[0]) {
         $controller->error();
         break;
 }
+
