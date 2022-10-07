@@ -41,7 +41,7 @@ class Controller
             strlen($_POST["type"]) != 0 && strlen($_POST["type"]) <= 100 &&
             strlen($_POST["brand"]) != 0 && strlen($_POST["brand"]) <= 100
         ) {
-            $this->modelCategories->PostCategory($_POST["type"], $_POST["brand"]);
+            $this->modelCategories->PostCategory(htmlspecialchars($_POST["type"]), htmlspecialchars($_POST["brand"]));
             header("Location: /admin");
         } else {
             http_response_code(400);
@@ -56,10 +56,10 @@ class Controller
             strlen($_POST["name"]) != 0 && strlen($_POST["name"]) <= 200 &&
             strlen($_POST["description"]) != 0 && strlen($_POST["description"]) <= 999999999 &&
             is_numeric($_POST["price"]) && floatval($_POST["price"]) >= 0 && floatval($_POST["price"]) <=99999999.99 &&
-            is_numeric($_POST["stock"]) && intval($_POST["stock"]) >= 0 && intval($_POST["stock"]) <= 2147483647 &&
+            is_numeric($_POST["stock"]) && intval($_POST["stock"]) >= 0 && intval($_POST["stock"]) <= 999999999 &&
             is_numeric($_POST["category"]) && $this->modelCategories->GetCategoryById($_POST["category"]) != false
         ) {    
-            $this->modelProducts->PostProduct($_POST["name"], $_POST["description"], $_POST["price"], $_POST["stock"], $_POST["category"]);
+            $this->modelProducts->PostProduct(htmlspecialchars($_POST["name"]), htmlspecialchars($_POST["description"]), strval(floatval($_POST["price"])), strval(intval($_POST["stock"])), strval(intval($_POST["category"])));
             header("Location: /admin");
         } else {
             http_response_code(400);

@@ -6,7 +6,7 @@
         {/if}
             <th>Nombre</th>
             <th>Descripcion</th>
-            <th>$Precio</th>
+            <th>Precio</th>
             <th>Stock</th>
             {if $show_id}
                 <th>fk: id categoria</td>
@@ -25,7 +25,7 @@
             {/if}
                 <td>{$product->name}</td>
                 <td>{$product->description}</td>
-                <td>{$product->price}</td>
+                <td>${$product->price}</td>
                 <td>{$product->stock} unidades</td>
                 {if $show_id}
                     <td>{$product->fk_category}</td>

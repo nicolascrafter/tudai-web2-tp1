@@ -17,7 +17,7 @@ class ModelProducts
     }
 
     function PostProduct($nombre, $descripcion, $precio, $stock, $categoria) {
-        $sentence = $this->db->prepare("INSERT INTO `products`(`name`, `description`, `price`, `stock`, `fk_category`) VALUES ('?','?',?,?,?)");
+        $sentence = $this->db->prepare("INSERT INTO `products`(`name`, `description`, `price`, `stock`, `fk_category`) VALUES (?,?,?,?,?)");
         $sentence->execute(array($nombre, $descripcion, $precio, $stock, $categoria));
     }
 

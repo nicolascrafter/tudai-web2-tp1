@@ -8,14 +8,13 @@
     <label for="price">Precio</label>
     <input type="number" name="price" min="0" max="99999999.99" step="0.01" value="0" required>
     <label for="stock">Stock (unidades)</label>
-    <input type="number" name="stock" min="0" max="2147483647" step="1" value="0" required>
+    <input type="number" name="stock" min="0" max="999999999" step="1" value="0" required>
     <label for="category">Categoria</label>
     <select name="category" required>
     {foreach $categories as $category}
         <option value="{$category->id}">{$category->type} - {$category->brand}</option>
     {/foreach}
     </select>
-    {* <input type="number" name="category"> *}
     <input type="submit">
 </form>
 <hr>
