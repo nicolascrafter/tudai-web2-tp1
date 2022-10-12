@@ -51,4 +51,5 @@
         </div>
     </div>
 </form>
+{include file="app/web/template/login_form.tpl"}
 {include file="app/web/template/footer.tpl"}
