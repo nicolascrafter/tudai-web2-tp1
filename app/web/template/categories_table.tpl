@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
         {if $show_id}
