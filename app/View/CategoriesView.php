@@ -10,7 +10,12 @@ class CategoriesView {
 
     public function ShowCategories($categories)
     {
-        $this->smarty->assign("admin", true);
+        session_start();
+        if (isset($_SESSION["IS_LOGGED"])) {
+            $this->smarty->assign("admin", true);
+        } else {
+            $this->smarty->assign("admin", false);
+        }
         $this->smarty->assign("categories", $categories);
         $this->smarty->display("app/web/template/categories_page.tpl");
     }

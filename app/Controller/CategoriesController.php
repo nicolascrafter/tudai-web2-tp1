@@ -2,18 +2,21 @@
 require_once "app/Model/CategoriesModel.php";
 require_once "app/View/CategoriesView.php";
 require_once "app/View/ErrorView.php";
+require_once "app/Helpers/AuthHelper.php";
 class CategoriesController
 {
     private $modelCategories;
     private $modelProducts;
     private $viewCategories;
     private $errorView;
+    private $authHelper;
     public function __construct()
     {
         $this->modelCategories = new CategoriesModel();
         $this->modelProducts = new ProductsModel();
         $this->viewCategories = new CategoriesView();
         $this->errorView = new ErrorView();
+        $this->authHelper = new AuthHelper();
     }
 
     public function ShowCategories()
@@ -33,6 +36,7 @@ class CategoriesController
 
     public function PostCategory()
     {
+        $this->authHelper->checkLogged();
         if (
             isset($_POST["type"])  && isset($_POST["brand"]) &&
             strlen($_POST["type"]) !== 0 && strlen($_POST["type"]) <= 100 &&
@@ -48,6 +52,7 @@ class CategoriesController
 
     public function ModifyCategory()
     {
+        $this->authHelper->checkLogged();
         if (
             isset($_POST["id"]) && !empty($_POST["id"]) && is_numeric($_POST["id"]) &&
             isset($_POST["type"])  && isset($_POST["brand"]) &&
@@ -65,6 +70,7 @@ class CategoriesController
 
     public function DeleteCategory()
     {
+        $this->authHelper->checkLogged();
         if (
             isset($_POST["id"]) && !empty($_POST["id"]) && is_numeric($_POST["id"]) &&
             $this->modelCategories->GetCategoryById(intval($_POST["id"])) !== false && count($this->modelProducts->GetProductsByCategory(intval($_POST["id"]))) === 0

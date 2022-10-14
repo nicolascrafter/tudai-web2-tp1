@@ -1,6 +1,6 @@
 {include file="app/web/template/header.tpl" title="Categories List"}
 {include file="app/web/template/categories_table.tpl"}
-{if admin}
+{if $admin}
     <hr>
     <h2>Agregar Categoria</h2>
     <form action="categories/post" method="post">

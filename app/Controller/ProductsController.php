@@ -2,11 +2,13 @@
 require_once "app/Model/ProductsModel.php";
 require_once "app/Model/CategoriesModel.php";
 require_once "app/View/ProductsView.php";
+require_once "app/Helpers/AuthHelper.php";
 class ProductsController {
     private $modelProducts;
     private $modelCategories;
     private $viewProducts;
     private $errorView;
+    private $authHelper;
 
     public function __construct()
     {
@@ -14,6 +16,7 @@ class ProductsController {
         $this->modelCategories = new CategoriesModel();
         $this->viewProducts = new ProductsView();
         $this->errorView = new ErrorView();
+        $this->authHelper = new AuthHelper();
     }
 
     public function ShowProducts()
@@ -28,6 +31,7 @@ class ProductsController {
 
     public function PostProduct()
     {
+        $this->authHelper->checkLogged();
         if (
             isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["price"]) && isset($_POST["stock"]) && isset($_POST["category"]) &&
             strlen($_POST["name"]) !== 0 && strlen($_POST["name"]) <= 200 &&
@@ -46,6 +50,7 @@ class ProductsController {
 
     public function ModifyProduct()
     {
+        $this->authHelper->checkLogged();
         if (
             isset($_POST["id"]) && !empty($_POST["id"]) && is_numeric($_POST["id"]) &&
             $this->modelProducts->GetProductById(strval(intval($_POST["id"]))) !== false &&
@@ -66,6 +71,7 @@ class ProductsController {
 
     public function DeleteProduct()
     {
+        $this->authHelper->checkLogged();
         if (
             isset($_POST["id"]) && !empty($_POST["id"]) && is_numeric($_POST["id"]) &&
             $this->modelProducts->GetProductById(strval(intval($_POST["id"]))) !== false

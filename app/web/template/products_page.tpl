@@ -1,7 +1,7 @@
 {include file="app/web/template/header.tpl" title="Products List"}
 {include file="app/web/template/products_table.tpl"}
-<hr>
-{if admin}
+{if $admin}
+    <hr>
     <h2>Agregar Producto</h2>
     <form action="products/post" , method="post" class="form-product">
         <label for="post_name" class="label-name">Nombre</label>
