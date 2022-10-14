@@ -1,10 +1,14 @@
 <?php
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
-require_once "app/Controller/Controller.php";
+require_once "app/Controller/CategoriesController.php";
+require_once "app/Controller/ProductsController.php";
 require_once "app/View/AdminView.php";
-$controller = new Controller();
+require_once "app/View/ErrorView.php";
+$categories_controller = new CategoriesController();
+$products_controller = new ProductsController();
 $admin_view = new AdminView();
+$error_view = new ErrorView();
 
 //recibir/leer la accion
 if (!empty($_GET['action'])) {
@@ -19,19 +23,23 @@ $params = explode('/', $accion);
 //
 switch ($params[0]) {
     case "index":
-        echo  ("index");
+        echo ("index");
         break;
-    case "admin":
-        if (isset($params[1]) && $params[1] == "post_category") {
-            $controller->PostCategory();
-        } elseif (isset($params[1]) && $params[1] == "post_product") {
-            $controller->PostProduct();
+    case "categories":
+        if (isset($params[1]) && $params[1] == "post") {
+            $categories_controller->PostCategory();
         } else {
-            $controller->AdminView();
+            $categories_controller->ShowCategories();
+        }
+        break;
+    case "products":
+        if (isset($params[1]) && $params[1] == "post") {
+            $products_controller->PostProduct();
+        } else {
+            $products_controller->ShowProducts();
         }
         break;
     default:
-        $controller->error();
+        $error_view->Error404($accion);
         break;
 }
-

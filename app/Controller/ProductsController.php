@@ -1,52 +1,24 @@
 <?php
-
-require_once("app/Model/ModelCategories.php");
-require_once("app/Model/ModelProducts.php");
-require_once("app/View/AdminView.php");
-
-class Controller
-{
-
-    private $smarty;
-    private $modelCategories;
+require_once "app/Model/ProductsModel.php";
+require_once "app/Model/CategoriesModel.php";
+require_once "app/View/ProductsView.php";
+class ProductsController {
     private $modelProducts;
-    private $adminView;
-    function __construct()
-    {
-        $this->smarty = new Smarty();
-        $this->smarty->assign("BASE_URL", BASE_URL);
+    private $modelCategories;
+    private $viewProducts;
 
-        $this->modelCategories = new ModelCategories();
-        $this->modelProducts = new ModelProducts();
-        $this->adminView = new AdminView();
+    public function __construct()
+    {
+        $this->modelProducts = new ProductsModel();
+        $this->modelCategories = new CategoriesModel();
+        $this->viewProducts = new ProductsView();
     }
 
-    function error()
-    {
-        http_response_code(404);
-        $this->smarty->display("app/web/template/error.tpl");
-    }
-
-    public function AdminView()
+    public function ShowProducts()
     {
         $products = $this->modelProducts->GetProducts();
         $categories = $this->modelCategories->GetCategories();
-        $this->adminView->MainView($products, $categories);
-    }
-
-    public function PostCategory()
-    {
-        if (
-            isset($_POST["type"])  && isset($_POST["brand"]) &&
-            strlen($_POST["type"]) != 0 && strlen($_POST["type"]) <= 100 &&
-            strlen($_POST["brand"]) != 0 && strlen($_POST["brand"]) <= 100
-        ) {
-            $this->modelCategories->PostCategory(htmlspecialchars($_POST["type"]), htmlspecialchars($_POST["brand"]));
-            header("Location: /admin");
-        } else {
-            http_response_code(400);
-        }
-        exit();
+        $this->viewProducts->ShowProducts($products, $categories); 
     }
 
     public function PostProduct()

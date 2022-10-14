@@ -1,7 +1,16 @@
+@import url(dark-theme.css) screen and (prefers-color-scheme: dark);
+@import url(light-theme.css) screen and (prefers-color-scheme: light);
+
+:root {
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    color-scheme: light dark;
+}
+
 table {
     border-collapse: collapse;
 }
 td, th {
-    border: 0.2em solid black;
+    border: 0.2em solid var(--table-border-color);
     padding: 0.25em;
 }
