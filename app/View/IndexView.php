@@ -1,6 +1,6 @@
 <?php
 require_once "libs/smarty/Smarty.class.php";
-class AdminView {
+class IndexView {
     private $smarty;
     function __construct()
     {
@@ -8,9 +8,9 @@ class AdminView {
         $this->smarty->assign("BASE_URL", BASE_URL);
     }
 
-    function MainView($products, $categories) {
+    function IndexView($products, $categories) {
         $this->smarty->assign("products", $products);
         $this->smarty->assign("categories", $categories);
-        $this->smarty->display("app/web/template/admin.tpl");
+        $this->smarty->display("app/web/template/index.tpl");
     }
 }

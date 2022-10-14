@@ -2,15 +2,19 @@
 
 require_once("app/Model/ModelCategories.php");
 require_once("app/Model/ModelProducts.php");
-require_once("app/View/AdminView.php");
-
+require_once("app/View/IndexView.php");
+require_once("app/View/AuthView.php");
+require_once('app/Helpers/AuthHelper.php');
 class Controller
 {
 
     private $smarty;
     private $modelCategories;
     private $modelProducts;
-    private $adminView;
+    private $indexView;
+    private $authHelper;
+    private $authView;
+
     function __construct()
     {
         $this->smarty = new Smarty();
@@ -18,7 +22,11 @@ class Controller
 
         $this->modelCategories = new ModelCategories();
         $this->modelProducts = new ModelProducts();
-        $this->adminView = new AdminView();
+        $this->indexView = new IndexView();
+        $this->authView = new AuthView(); 
+        
+        $this->authHelper = new AuthHelper();
+        
     }
 
     function error()
@@ -27,11 +35,18 @@ class Controller
         $this->smarty->display("app/web/template/error.tpl");
     }
 
-    public function AdminView()
+    public function IndexView()
     {
         $products = $this->modelProducts->GetProducts();
         $categories = $this->modelCategories->GetCategories();
-        $this->adminView->MainView($products, $categories);
+        $this->indexView->IndexView($products, $categories);
+    }
+
+    public function showAdminView() {
+        $this->authHelper->checkLogged();
+        $products = $this->modelProducts->GetProducts();
+        $categories = $this->modelCategories->GetCategories();
+        $this->authView->showAuthView($products,$categories);
     }
 
     public function PostCategory()
