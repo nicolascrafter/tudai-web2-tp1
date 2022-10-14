@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2022 a las 21:09:39
+-- Tiempo de generación: 15-10-2022 a las 00:26:45
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -41,7 +41,8 @@ INSERT INTO `categories` (`id`, `type`, `brand`) VALUES
 (1, 'Tarjeta Grafica', 'Nvidia'),
 (2, 'Tarjeta Grafica', 'AMD'),
 (3, 'CPU', 'Intel'),
-(4, 'CPU', 'AMD');
+(4, 'CPU', 'AMD'),
+(5, 'Monitor', 'LG');
 
 -- --------------------------------------------------------
 
@@ -58,24 +59,33 @@ CREATE TABLE `products` (
   `fk_category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Volcado de datos para la tabla `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `fk_category`) VALUES
+(1, 'ASUS GeForce GTX 1660 TI 6GB GDDR6 TUF EVO OC', 'Tipo\r\npcie\r\nChipset Gpu\r\nGTX 1660 Ti\r\nEntrada Video\r\nNo\r\nPuente Para Sli/croosfirex\r\n-\r\nDoble Puente\r\nNo', '92450.00', 100, 1),
+(2, 'Ryzen 5 5600G', 'MARCA: AMD\r\nMODELO: Ryzen 5 5600G\r\n\r\nEspecificaciones\r\nN.° de núcleos de CPU: 6\r\nN.° de subprocesos: 12\r\nN.° de núcleos de GPU: 7\r\nReloj base: 3.9GHz\r\nReloj de aumento máx.: Hasta 4.4GHz\r\nCaché L2 total: 3MB\r\nCaché L3 total: 16MB\r\nDesbloqueados: Sí\r\nCMOS: TSMC 7nm FinFET\r\nPaquete: AM4\r\nVersión de PCI Express: PCIe® 3.0\r\nSolución térmica: Wraith Stealth\r\nTDP/TDP predeterminado: 65W\r\ncTDP: 45-65W\r\nTemp. máx.: 95°C\r\n*Compatible con SO: Windows 10 edición de 64·bits - RHEL x86 edición de 64·bits - Ubuntu x86 edición de 64·bits\r\n*El soporte del sistema operativo (SO) variará según el fabricante.\r\n\r\nMemoria\r\nVelocidad máxima de memoria: Up to 3200MHz\r\nTipo de memoria: DDR4\r\nCanales de memoria: 2\r\n\r\nEspecificaciones de gráficos\r\nFrecuencia de gráficos: 1900 MHz\r\nModelo de gráficos: Radeon™ Graphics\r\nCant. de núcleos de los gráficos: 7\r\n\r\nFuncionalidades principales\r\nDisplay Port: Sí\r\nHDMI™: Sí\r\n\r\nFundación\r\nFamilia de productos: AMD Ryzen™ Processors\r\nLínea de productos: AMD Ryzen™ 5 5000 G-Series Desktop Processors with Radeon™ Graphics\r\nPlataforma: Boxed Processor\r\nBandeja OPN: 100-000000252\r\nOPN PIB: 100-100000252BOX\r\nOPN MPKL: 100-100000252MPK\r\nFecha de lanzamiento: 4/13/2021', '43999.00', 100, 4),
+(4, 'Ryzen 5 5600G', 'MARCA: AMD\r\nMODELO: Ryzen 5 5600G\r\n\r\nEspecificaciones\r\nN.° de núcleos de CPU: 6\r\nN.° de subprocesos: 12\r\nN.° de núcleos de GPU: 7\r\nReloj base: 3.9GHz\r\nReloj de aumento máx.: Hasta 4.4GHz\r\nCaché L2 total: 3MB\r\nCaché L3 total: 16MB\r\nDesbloqueados: Sí\r\nCMOS: TSMC 7nm FinFET\r\nPaquete: AM4\r\nVersión de PCI Express: PCIe® 3.0\r\nSolución térmica: Wraith Stealth\r\nTDP/TDP predeterminado: 65W\r\ncTDP: 45-65W\r\nTemp. máx.: 95°C\r\n*Compatible con SO: Windows 10 edición de 64·bits - RHEL x86 edición de 64·bits - Ubuntu x86 edición de 64·bits\r\n*El soporte del sistema operativo (SO) variará según el fabricante.\r\n\r\nMemoria\r\nVelocidad máxima de memoria: Up to 3200MHz\r\nTipo de memoria: DDR4\r\nCanales de memoria: 2\r\n\r\nEspecificaciones de gráficos\r\nFrecuencia de gráficos: 1900 MHz\r\nModelo de gráficos: Radeon™ Graphics\r\nCant. de núcleos de los gráficos: 7\r\n\r\nFuncionalidades principales\r\nDisplay Port: Sí\r\nHDMI™: Sí\r\n\r\nFundación\r\nFamilia de productos: AMD Ryzen™ Processors\r\nLínea de productos: AMD Ryzen™ 5 5000 G-Series Desktop Processors with Radeon™ Graphics\r\nPlataforma: Boxed Processor\r\nBandeja OPN: 100-000000252\r\nOPN PIB: 100-100000252BOX\r\nOPN MPKL: 100-100000252MPK\r\nFecha de lanzamiento: 4/13/2021', '43999.00', 101, 4);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user`
+-- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `email` text COLLATE utf8_bin NOT NULL,
+  `password` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `user`
+-- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`) VALUES
-(1, 'user@tudai.com', '$2y$10$fhgGZtz0EIaCp4okKQhBee8/i9kTB9qBfwV8ApSPR80kOlSZtoyKK');
+INSERT INTO `users` (`id`, `email`, `password`) VALUES
+(1, 'user@tudai.com', '$2y$10$Lzulm9rUjD8pFEuXgM4fouOwCpRtYhvXRqOm9qscZEtwYK9W9DfSu');
 
 --
 -- Índices para tablas volcadas
@@ -95,9 +105,9 @@ ALTER TABLE `products`
   ADD KEY `fk_category` (`fk_category`);
 
 --
--- Indices de la tabla `user`
+-- Indices de la tabla `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -108,18 +118,18 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `user`
+-- AUTO_INCREMENT de la tabla `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
