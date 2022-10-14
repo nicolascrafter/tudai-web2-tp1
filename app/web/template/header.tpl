@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="{$BASE_URL}">
     <link rel="stylesheet" href="app/web/css/style.css">
+    <script src="app/web/js/modal_dialogs.js"></script>
     <title>{$title}</title>
 </head>
 <body>

@@ -16,10 +16,21 @@
                     <td>{$category->brand}</td>
                     {if $admin}
                         <td>
-                            <form action="admin/delete_product" method="post">
+                            <form action="categories/delete" method="post">
                                 <input type="hidden" name="id" value="{$category->id}">
-                                <input type="submit" disabled value="Borrar Categoria">
+                                <input type="submit" {if !$category->can_delete}disabled title="No se puede borrar una categoria que tenga al menos un producto"{/if}value="Borrar Categoria">
                             </form>
+                            <button type="button" class="modify-button">Modificar Categoria</button>
+                            <dialog>
+                                    <form action="categories/modify" method="post">
+                                        <input type="hidden" name="id" value="{$category->id}">
+                                        <label for="modify_type">Tipo</label>
+                                        <input type="text" name="type" id="modify_type" value="{$category->type}">
+                                        <label for="modify_brand">Marca</label>
+                                        <input type="text" name="brand" id="modify_brand" value="{$category->brand}">
+                                        <input type="submit">
+                                    </form>
+                            </dialog>
                         </td>
                     {/if}
                 </tr>

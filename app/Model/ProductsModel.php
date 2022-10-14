@@ -16,6 +16,14 @@ class ProductsModel
         return $data;
     }
 
+    function GetProductById($id)
+    {
+        $sentence = $this->db->prepare("SELECT * FROM `products` WHERE id = ?;");
+        $sentence->execute(array($id));
+        $data = $sentence->fetch(PDO::FETCH_OBJ);
+        return $data;
+    }
+
     function GetProductsByCategory($category) {
         $sentence = $this->db->prepare("SELECT * FROM `products` WHERE fk_category = ?;");
         $sentence->execute(array($category));
