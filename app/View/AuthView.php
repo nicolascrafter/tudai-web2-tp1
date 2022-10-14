@@ -6,16 +6,12 @@ class AuthView {
 
     public function __construct() {
         $this->smarty = new Smarty();
+        $this->smarty->assign("BASE_URL", BASE_URL);
     }
 
     function showFormLogin($error = null) {
         $this->smarty->assign("error", $error);
+        $this->smarty->assign("title", "Login");
         $this->smarty->display("app/web/template/login_form.tpl");
-    }
-
-    function showAuthView($products, $categories) {
-        $this->smarty->assign("products", $products);
-        $this->smarty->assign("categories", $categories);
-        $this->smarty->display("app/web/template/admin.tpl");
     }
 }

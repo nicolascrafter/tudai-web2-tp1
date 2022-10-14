@@ -1,5 +1,5 @@
 <?php
-class ModelCategories {
+class CategoriesModel {
     private $db;
     function __construct()
     {
@@ -28,15 +28,15 @@ class ModelCategories {
         $sentence->execute(array($tipo, $marca));
     }
 
+    public function ModifyCategory($id, $tipo, $marca)
+    {
+        $sentence = $this->db->prepare("UPDATE `categories` SET `type`=?,`brand`=? WHERE id=?");
+        $sentence->execute(array($tipo, $marca, $id));
+    }
+
     public function DeleteCategory($id)
     {
         $sentence = $this->db->prepare("DELETE FROM `categories` WHERE id=?");
         $sentence->execute(array($id));
-    }
-
-    public function ModifyCategory($id, $tipo, $marca)
-    {
-        $sentence = $this->db->prepare("UPDATE `categories` SET `type`='?',`brand`='?' WHERE id=?");
-        $sentence->execute(array($tipo, $marca, $id));
     }
 }

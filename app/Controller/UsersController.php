@@ -1,14 +1,14 @@
 <?php
 
-require_once './app/Model/AdminModel.php';
+require_once './app/Model/UsersModel.php';
 require_once './app/View/AuthView.php';
 
-class AuthController {
+class UsersController {
     private $model;
     private $view;
 
     public function __construct() {
-        $this->model = new AdminModel();
+        $this->model = new UsersModel();
         $this->view = new AuthView();
     }
 

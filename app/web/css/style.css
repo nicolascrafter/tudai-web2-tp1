@@ -1,7 +1,69 @@
+@import url(dark-theme.css) screen and (prefers-color-scheme: dark);
+@import url(light-theme.css) screen and (prefers-color-scheme: light);
+
+:root {
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    color-scheme: light dark;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 30%);
+    backdrop-filter: blur(0.2em);
+}
+
+.form-product {
+    display: grid;
+    grid-template-areas: 
+    "ln ld"
+    "in id"
+    "lc id"
+    "ic id"
+    "lp id"
+    "ip id"
+    "ls id"
+    "is id"
+    "bs bs";
+}
+
+.form-product .label-name {
+    grid-area: ln;
+}
+.form-product .input-name {
+    grid-area: in;
+}
+.form-product .label-category {
+    grid-area: lc;
+}
+.form-product .input-category {
+    grid-area: ic;
+}
+.form-product .label-price {
+    grid-area: lp;
+}
+.form-product .input-price {
+    grid-area: ip;
+}
+.form-product .label-stock {
+    grid-area: ls;
+}
+.form-product .input-stock {
+    grid-area: is;
+}
+.form-product .label-description {
+    grid-area: ld;
+}
+.form-product .input-description {
+    grid-area: id;
+}
+.form-product .submit {
+    grid-area: bs;
+}
+
 table {
     border-collapse: collapse;
 }
 td, th {
-    border: 0.2em solid black;
+    border: 0.2em solid var(--table-border-color);
     padding: 0.25em;
 }

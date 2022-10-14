@@ -1,5 +1,5 @@
 <?php
-class ModelProducts
+class ProductsModel
 {
     private $db;
 
@@ -16,9 +16,29 @@ class ModelProducts
         return $data;
     }
 
+    function GetProductById($id)
+    {
+        $sentence = $this->db->prepare("SELECT * FROM `products` WHERE id = ?;");
+        $sentence->execute(array($id));
+        $data = $sentence->fetch(PDO::FETCH_OBJ);
+        return $data;
+    }
+
+    function GetProductsByCategory($category) {
+        $sentence = $this->db->prepare("SELECT * FROM `products` WHERE fk_category = ?;");
+        $sentence->execute(array($category));
+        $data = $sentence->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    }
+
     function PostProduct($nombre, $descripcion, $precio, $stock, $categoria) {
         $sentence = $this->db->prepare("INSERT INTO `products`(`name`, `description`, `price`, `stock`, `fk_category`) VALUES (?,?,?,?,?)");
         $sentence->execute(array($nombre, $descripcion, $precio, $stock, $categoria));
+    }
+
+    function ModifyProduct($id, $nombre, $descripcion, $precio, $stock, $categoria) {
+        $sentence = $this->db->prepare("UPDATE `products` SET `name`=?,`description`=?,`price`=?,`stock`=?,`fk_category`=? WHERE id=?");
+        $sentence->execute(array($nombre, $descripcion, $precio, $stock, $categoria, $id));
     }
 
     function DeleteProduct($id) {
