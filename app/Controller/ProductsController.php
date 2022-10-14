@@ -20,7 +20,10 @@ class ProductsController {
     {
         $products = $this->modelProducts->GetProducts();
         $categories = $this->modelCategories->GetCategories();
-        $this->viewProducts->ShowProducts($products, $categories); 
+        foreach ($products as $product) {
+            $product->description_table = implode("<br>",preg_split("/\r\n|\n|\r/", $product->description));
+        }
+        $this->viewProducts->ShowProducts($products, $categories);
     }
 
     public function PostProduct()
