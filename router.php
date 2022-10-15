@@ -15,7 +15,7 @@ $error_view = new ErrorView();
 if (!empty($_GET['action'])) {
     $accion = $_GET['action'];
 } else {
-    $accion = 'products';
+    $accion = 'products/view';
 }
 
 // parseo el string de action por "/" y me devuelve el arreglo
@@ -30,8 +30,14 @@ switch ($params[0]) {
             $categories_controller->DeleteCategory();
         } elseif (isset($params[1]) && $params[1] == "modify") {
             $categories_controller->ModifyCategory();
+        } elseif (isset($params[1]) && $params[1] == "view") {
+            if (isset($params[2])) {
+                $categories_controller->ShowProductsByCategory($params[2]);
+            } else {
+                $categories_controller->ShowCategories();
+            }
         } else {
-            $categories_controller->ShowCategories();
+            $error_view->Error404($accion);
         }
         break;
     case "products":
@@ -41,8 +47,14 @@ switch ($params[0]) {
             $products_controller->DeleteProduct();
         } elseif (isset($params[1]) && $params[1] == "modify") {
             $products_controller->ModifyProduct();
+        } elseif (isset($params[1]) && $params[1] == "view") {
+            if (isset($params[2])) {
+                $products_controller->ShowProductsById($params[2]);
+            } else {
+                $products_controller->ShowProducts();
+            }
         } else {
-            $products_controller->ShowProducts();
+            $error_view->Error404($accion);
         }
         break;
     case "login":

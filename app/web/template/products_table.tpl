@@ -16,7 +16,7 @@
         {if count($products) > 0}
             {foreach $products as $product}
                 <tr>
-                    <td>{$product->name}</td>
+                    <td><a href="products/view/{$product->id}">{$product->name}</a></td>
                     <td>{$product->description_table}</td>
                     <td>${$product->price}</td>
                     <td>{$product->stock} unidades</td>

@@ -34,6 +34,18 @@ class CategoriesController
         $this->viewCategories->ShowCategories($categories);
     }
 
+    public function ShowProductsByCategory($id)
+    {
+        if (!empty($id) && is_numeric($id)) {
+            $category = $this->modelCategories->GetCategoryById(strval(intval($id)));
+            $products = $this->modelProducts->GetProductsByCategory(strval(intval($id)));
+            foreach ($products as $product) {
+                $product->description_table = implode("<br>",preg_split("/\r\n|\n|\r/", $product->description));
+            }
+            $this->viewCategories->ShowProductsByCategory($category, $products);
+        }
+    }
+
     public function PostCategory()
     {
         $this->authHelper->checkLogged();
@@ -43,7 +55,7 @@ class CategoriesController
             strlen($_POST["brand"]) !== 0 && strlen($_POST["brand"]) <= 100
         ) {
             $this->modelCategories->PostCategory(htmlspecialchars($_POST["type"]), htmlspecialchars($_POST["brand"]));
-            header("Location: /categories");
+            header("Location: ".BASE_URL."/categories/view");
         } else {
             $this->errorView->Error400();
         }
@@ -61,7 +73,7 @@ class CategoriesController
             strlen($_POST["brand"]) !== 0 && strlen($_POST["brand"]) <= 100
         ) {
             $this->modelCategories->ModifyCategory(strval(intval($_POST["id"])), htmlspecialchars($_POST["type"]), htmlspecialchars($_POST["brand"]));
-            header("Location: /categories");
+            header("Location: ".BASE_URL."/categories/view");
         } else {
             $this->errorView->Error400();
         }
@@ -76,7 +88,7 @@ class CategoriesController
             $this->modelCategories->GetCategoryById(intval($_POST["id"])) !== false && count($this->modelProducts->GetProductsByCategory(intval($_POST["id"]))) === 0
         ) {
             $this->modelCategories->DeleteCategory(intval($_POST["id"]));
-            header("Location: /categories");
+            header("Location: ".BASE_URL."/categories/view");
         } else {
             $this->errorView->Error400();
         };

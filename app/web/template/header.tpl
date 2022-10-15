@@ -14,8 +14,8 @@
 <body>
     <header>
         <nav>
-            <a href="categories">Categorias</a>
-            <a href="products">Productos</a>
+            <a href="categories/view">Categorias</a>
+            <a href="products/view">Productos</a>
             {if !$admin}
                 <a href="login">Login</a>
             {else}

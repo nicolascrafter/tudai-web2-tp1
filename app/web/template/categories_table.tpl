@@ -12,7 +12,7 @@
         {if count($categories) > 0}
             {foreach $categories as $category}
                 <tr>
-                    <td>{$category->type}</td>
+                    <td><a href="categories/view/{$category->id}">{$category->type}</a></td>
                     <td>{$category->brand}</td>
                     {if $admin}
                         <td>

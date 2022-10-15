@@ -18,7 +18,7 @@ class ProductsModel
 
     function GetProductById($id)
     {
-        $sentence = $this->db->prepare("SELECT * FROM `products` WHERE id = ?;");
+        $sentence = $this->db->prepare("SELECT products.*, categories.id AS category_id, categories.type, categories.brand FROM products JOIN categories ON products.fk_category = categories.id WHERE products.id = ?;");
         $sentence->execute(array($id));
         $data = $sentence->fetch(PDO::FETCH_OBJ);
         return $data;

@@ -20,4 +20,16 @@ class ProductsView{
         $this->smarty->assign("categories", $categories);
         $this->smarty->display("app/web/template/products_page.tpl");
     }
+
+    public function ShowProductById($product)
+    {
+        session_start();
+        if (isset($_SESSION["IS_LOGGED"])) {
+            $this->smarty->assign("admin", true);
+        } else {
+            $this->smarty->assign("admin", false);
+        }
+        $this->smarty->assign("product", $product);
+        $this->smarty->display("app/web/template/product.tpl");
+    }
 }

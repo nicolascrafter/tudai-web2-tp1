@@ -29,6 +29,16 @@ class ProductsController {
         $this->viewProducts->ShowProducts($products, $categories);
     }
 
+    public function ShowProductsById($id)
+    {
+        if (!empty($id) && is_numeric($id) && $this->modelProducts->GetProductById(strval(intval($id))) != false) {
+            $product = $this->modelProducts->GetProductById(strval(intval($id)));
+            $this->viewProducts->ShowProductById($product);
+        } else {
+            $this->errorView->Error404("products/".$id);
+        }
+    }
+
     public function PostProduct()
     {
         $this->authHelper->checkLogged();
@@ -41,7 +51,7 @@ class ProductsController {
             is_numeric($_POST["category"]) && $this->modelCategories->GetCategoryById($_POST["category"]) != false
         ) {    
             $this->modelProducts->PostProduct(htmlspecialchars($_POST["name"]), htmlspecialchars($_POST["description"]), strval(floatval($_POST["price"])), strval(intval($_POST["stock"])), strval(intval($_POST["category"])));
-            header("Location: /products");
+            header("Location: ".BASE_URL."/products/view");
         } else {
             $this->errorView->Error400();
         }
@@ -62,7 +72,7 @@ class ProductsController {
             is_numeric($_POST["category"]) && $this->modelCategories->GetCategoryById(intval($_POST["category"])) !== false
         ) {    
             $this->modelProducts->ModifyProduct(strval(intval($_POST["id"])), htmlspecialchars($_POST["name"]), htmlspecialchars($_POST["description"]), strval(floatval($_POST["price"])), strval(intval($_POST["stock"])), strval(intval($_POST["category"])));
-            header("Location: /products");
+            header("Location: ".BASE_URL."/products/view");
         } else {
             $this->errorView->Error400();
         }
@@ -77,7 +87,7 @@ class ProductsController {
             $this->modelProducts->GetProductById(strval(intval($_POST["id"]))) !== false
         ) {
             $this->modelProducts->DeleteProduct(strval(intval($_POST["id"])));
-            header("Location: /products");
+            header("Location: ".BASE_URL."/products/view");
         } else {
             $this->errorView->Error400();
         };
