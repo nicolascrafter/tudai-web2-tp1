@@ -36,13 +36,15 @@ class CategoriesController
 
     public function ShowProductsByCategory($id)
     {
-        if (!empty($id) && is_numeric($id)) {
+        if (!empty($id) && is_numeric($id) && $this->modelCategories->GetCategoryById(strval(intval($id))) !== false) {
             $category = $this->modelCategories->GetCategoryById(strval(intval($id)));
             $products = $this->modelProducts->GetProductsByCategory(strval(intval($id)));
             foreach ($products as $product) {
                 $product->description_table = implode("<br>",preg_split("/\r\n|\n|\r/", $product->description));
             }
             $this->viewCategories->ShowProductsByCategory($category, $products);
+        } else {
+            $this->errorView->Error404("categories/view/".$id);
         }
     }
 

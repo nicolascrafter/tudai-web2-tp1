@@ -33,6 +33,7 @@ class ProductsController {
     {
         if (!empty($id) && is_numeric($id) && $this->modelProducts->GetProductById(strval(intval($id))) != false) {
             $product = $this->modelProducts->GetProductById(strval(intval($id)));
+            $product->description_table = implode("<br>",preg_split("/\r\n|\n|\r/", $product->description));
             $this->viewProducts->ShowProductById($product);
         } else {
             $this->errorView->Error404("products/".$id);
